@@ -16,18 +16,30 @@ import http from "http";
 // GET /users => Buscando usuários no banc-end
 // POST /users => Criar um usuário no back-end
 
+// Json - JavaScript Object Notation
+
+const users = [];
+
 const server = http.createServer((req, res) => {
   const { method, url } = req;
 
   if (method === "GET" && url === "/users") {
-    return res.end('Listagem de usuários');
-  } 
-
-  if (method === "POST" && url === "/users") {
-    return res.end('Usuário criado com sucesso');
+    return res
+    .setHeader("Content-Type", "application/json")
+    .end(JSON.stringify(users));
   }
 
-  return res.end('Método não permitido');
+  if (method === "POST" && url === "/users") {
+    users.push({
+      id: 1,
+      name: "Teste",
+      email: "teste@teste.com"
+    });
+
+    return res.end("Usuário criado com sucesso");
+  }
+
+  return res.end("Hello World!");
 });
 
-
+server.listen(3333)
