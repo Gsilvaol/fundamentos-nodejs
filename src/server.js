@@ -18,6 +18,8 @@ import http from "http";
 
 // Json - JavaScript Object Notation
 
+// HTTP Status Codes
+
 const users = [];
 
 const server = http.createServer((req, res) => {
@@ -36,10 +38,10 @@ const server = http.createServer((req, res) => {
       email: "teste@teste.com"
     });
 
-    return res.end("Usuário criado com sucesso");
+    return res.writeHead(201).end();
   }
 
-  return res.end("Hello World!");
+  return res.writeHead(404).end();
 });
 
 server.listen(3333)
